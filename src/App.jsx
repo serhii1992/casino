@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import SlotGame from "./components/SlotGame";
-import UI from "./components/UI";
 import "./styles/styles.css";
 
 export default function App() {
@@ -13,11 +12,9 @@ export default function App() {
     }
   }, [canvasWrapper]);
 
-  const start = new UI();
-  console.log(start);
   return (
     <>
-      <button onClick={()=>{start.startPlay()}}>Start</button>
+      <button onClick={()=>{game.current.ui.startPlay()}}>Start</button>
 
       <div className="App" ref={setCanvasWrapper}></div>
     </>

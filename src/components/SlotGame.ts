@@ -2,13 +2,32 @@ import * as PIXI from 'pixi.js';
 import UI from './UI';
 
 export default class SlotGame {
-  public static readonly width: number = 800;
-  public static readonly height: number = 800;
-  public static readonly resources: string[] = [
-    '/images/zero.svg',
-    '/images/animalface_kirin.png',
-    '/images/animalface_tanuki.png',
-    '/images/animalface_usagi.png'
+
+  public static readonly defaultNumberStyle: PIXI.TextStyle = new PIXI.TextStyle({
+    fontFamily: "Arial",
+    fontSize: 36,
+    fontStyle: "italic",
+    fontWeight: "bold",
+    fill: ["#ffffff", "#00ff99"], // gradient
+    stroke: "#4a1850",
+    strokeThickness: 5,
+    dropShadow: true,
+    dropShadowColor: "#000000",
+    dropShadowBlur: 4,
+    dropShadowAngle: Math.PI / 6,
+    dropShadowDistance: 6,
+    wordWrap: true,
+    wordWrapWidth: 440,
+  });
+
+  public static readonly width: number = 440;
+  public static readonly height: number = 100;
+
+  public static  resources: any[] = [
+    // '/images/zero.svg',
+    // '/images/animalface_kirin.png',
+    // '/images/animalface_tanuki.png',
+    // '/images/animalface_usagi.png'
   ];
 
   private app!: PIXI.Application;
@@ -24,18 +43,23 @@ export default class SlotGame {
     });
 
     canvasWrapper.appendChild(this.app.view);
-
-    for (let i = 0; i < SlotGame.resources.length; i++) {
-      const resource = SlotGame.resources[i];
-      this.app.loader.add(resource);
+    
+    for (let i = 0; i < 4; i++) {
+      const number = new PIXI.Text(i + "", SlotGame.defaultNumberStyle);
+console.log(number)
+      // this.app.stage.addChild(resource);
     }
-
+    
     this.app.loader.load(() => {
       this.ui = new UI();
       this.onReady();
     });
-
+    
     this.start()
+
+    
+
+    // const textTop = new PIXI.Text("1", SlotGame.defaultNumberStyle);
   
   }
 

@@ -36,33 +36,7 @@ export default class UI extends PIXI.Container {
     for (let i = 0; i < 5; i++) {
       this.reelContainer.addChild(new Reel(i));
     }
-
-    const coverTop = new PIXI.Graphics();
-    coverTop.beginFill(0, 1);
-    coverTop.drawRect(0, 0, SlotGame.width, margin);
-
-    const coverBottom = new PIXI.Graphics();
-    coverBottom.beginFill(0, 1);
-    coverBottom.drawRect(0, Reel.SYMBOL_SIZE * 3 + margin, SlotGame.width, margin);
-
-    const textTop = new PIXI.Text("PIXI MONSTER SLOTS!", UI.defaultTextStyle);
-    textTop.x = Math.round((coverTop.width - textTop.width) / 2);
-    textTop.y = Math.round((margin - textTop.height) / 2);
-
-    const textBottom = new PIXI.Text("Spin the wheels!", UI.defaultTextStyle);
-    textBottom.x = Math.round((coverBottom.width - textBottom.width) / 2);
-    textBottom.y = SlotGame.height - margin + Math.round((margin - textBottom.height) / 2);
-
-    coverTop.addChild(textTop);
-    coverBottom.addChild(textBottom);
-
     this.addChild(this.reelContainer);
-    this.addChild(coverTop);
-    this.addChild(coverBottom);
-
-    coverBottom.interactive = true;
-    coverBottom.buttonMode = true;
-    coverBottom.addListener("pointerdown", () => this.startPlay());
   }
 
   public startPlay(): void {
@@ -71,7 +45,6 @@ export default class UI extends PIXI.Container {
     }
 
     this.reelsRunning = true;
-    //debugger;
     const reels = this.reelContainer.children;
     for (let i = 0; i < reels.length; i++) {
       const reel = reels[i] as Reel;
@@ -87,7 +60,6 @@ export default class UI extends PIXI.Container {
         target,
         time,
         Tween.backout(0.5),
-        //@ts-ignore
         null,
         i === reels.length - 1
           ? () => {

@@ -10,13 +10,14 @@ export default class Tween {
     public target: number,
     public time: number,
     public easing: (t: number) => number,
-    public change: (tween: Tween) => void | null,
-    public complete: (tween: Tween) => void | null
+    public change: ((tween: Tween) => void | null) | null,
+    public complete: ((tween: Tween) => void | null) | null,
   ) {
     this.propertyBeginValue = object[property];
   }
 
   public static update(): void {
+
     const now = Date.now();
     const remove = [];
     for (let i = 0; i < Tween.tweening.length; i++) {

@@ -2,7 +2,7 @@ import * as PIXI from 'pixi.js';
 import SlotGame from './SlotGame';
 
 export default class Reel extends PIXI.Container {
-  public static readonly WIDTH: number = 80;
+  public static readonly WIDTH: number = 100;
   public static readonly SYMBOL_SIZE: number = 50;
 
   public static get randomTexture(): PIXI.Texture {
@@ -12,7 +12,8 @@ export default class Reel extends PIXI.Container {
         Reel.slotTextures.push(PIXI.Texture.from(resource));
       }
     }
-
+    
+    
     return Reel.slotTextures[Math.floor(Math.random() * Reel.slotTextures.length)];
   }
 
