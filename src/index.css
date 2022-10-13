@@ -1,0 +1,11 @@
+* {
+    box-sizing: border-box;
+}
+
+.App {
+  width: 430px;
+  height: 350px;
+  background: url("../public/images/slot-bg.png") no-repeat;
+  background-size: 100% 100%;
+  padding: 30px 0;
+}
