@@ -1,3 +1,5 @@
+import { Console } from "console";
+
 export default class Tween {
   public static tweening: Tween[] = [];
 
@@ -17,13 +19,11 @@ export default class Tween {
   }
 
   public static update(): void {
-
     const now = Date.now();
     const remove = [];
     for (let i = 0; i < Tween.tweening.length; i++) {
       const tween = Tween.tweening[i];
       const phase = Math.min(1, (now - tween.start) / tween.time);
-
       tween.object[tween.property] = Tween.lerp(tween.propertyBeginValue, tween.target, tween.easing(phase));
       if (tween.change) {
         tween.change(tween);
@@ -40,7 +40,7 @@ export default class Tween {
       Tween.tweening.splice(Tween.tweening.indexOf(remove[i]), 1);
     }
   }
-
+  
   public static backout(amount: number): (t: number) => number {
     return t => (--t * t * ((amount + 1) * t + amount) + 1);
   }

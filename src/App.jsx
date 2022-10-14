@@ -6,11 +6,14 @@ import "./styles/styles.css";
 export default function App() {
   const [canvasWrapper, setCanvasWrapper] = useState();
   const game = useRef();
-const obj = new Reel()
-console.log(obj);
+
+  const onComplete = (str)=>{
+    console.log( str);
+  }
+
   useEffect(() => {
     if (canvasWrapper) {
-      game.current = new SlotGame(canvasWrapper);
+      game.current = new SlotGame(canvasWrapper, onComplete);
     }
   }, [canvasWrapper]);
 

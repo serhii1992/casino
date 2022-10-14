@@ -1,11 +1,10 @@
 import * as PIXI from "pixi.js";
-import { Sprite } from "pixi.js";
 import UI from "./UI";
 
 export default class SlotGame {
   public static readonly width: number = 430;
   public static readonly height: number = 290;
-  //public static sprite: PIXI.Sprite[];
+  public static  comination: string = '2222'
 
   public static readonly resources: string[] = [
     "/images/0.png",
@@ -24,7 +23,7 @@ export default class SlotGame {
   private ui!: UI;
   private onReady: () => void = () => {};
 
-  constructor(canvasWrapper: any) {
+  constructor(canvasWrapper: any, onComplete: any) {
     this.app = new PIXI.Application({
       width: SlotGame.width,
       height: SlotGame.height,
@@ -39,24 +38,23 @@ export default class SlotGame {
     }
 
     this.app.loader.load(() => {
-      this.ui = new UI();
+      this.ui = new UI(onComplete);
       this.onReady();
     });
 
-    this.app.loader.onComplete.add((loader, res) => {
+    // this.app.loader.onComplete.add((loader, res) => {
 
-      const arr  = Object.entries(res).map(([name, { texture }]) => {
-        const sp = new PIXI.Sprite(texture)
-        sp.name = name
-        return sp
+    //   const arr  = Object.entries(res).map(([name, { texture }]) => {
+    //     const sp = new PIXI.Sprite(texture)
+    //     sp.name = name
+    //     return sp
         
-      });
-      // SlotGame.sprite = arr
+    //   });
+    //   // SlotGame.sprite = arr
   
-    });
+    // });
 
     this.start();
-    console.log(this.app.loader)
   }
 
   public start(): void {
@@ -70,4 +68,6 @@ export default class SlotGame {
       this.ui.update();
     });
   }
+
+  
 }

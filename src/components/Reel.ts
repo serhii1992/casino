@@ -18,8 +18,8 @@ export default class Reel extends PIXI.Container {
 
   private static slotTextures: PIXI.Texture[] = [];
   public blur = new PIXI.filters.BlurFilter();
-  public index: number = 0;
-  public previousIndex: number = 0;
+  public spritePosition: number = 2;
+  public prevSpritePosition: number = 0;
 
   constructor(index: number) {
     super();
@@ -36,8 +36,8 @@ export default class Reel extends PIXI.Container {
   }
 
   public update(): void {
-    this.blur.blurY = (this.index - this.previousIndex) * 10;
-    this.previousIndex = this.index;
+    this.blur.blurY = (this.spritePosition - this.prevSpritePosition) * 11;
+    this.prevSpritePosition = this.spritePosition;
     for (let i = 0; i < this.children.length; i++) {      
       const symbol = this.children[i] as PIXI.Sprite;
 
@@ -46,7 +46,7 @@ export default class Reel extends PIXI.Container {
       }
 
       const prevY = symbol.y;
-      symbol.y = ((this.index + i) % this.children.length) * Reel.SYMBOL_SIZE* 1.15  - Reel.SYMBOL_SIZE ;
+      symbol.y = ((this.spritePosition + i) % this.children.length) * Reel.SYMBOL_SIZE * 1.15  - Reel.SYMBOL_SIZE ;
 
       if (prevY <= Reel.SYMBOL_SIZE) {
         continue;
